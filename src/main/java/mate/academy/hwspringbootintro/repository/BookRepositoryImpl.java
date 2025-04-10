@@ -2,11 +2,12 @@ package mate.academy.hwspringbootintro.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import mate.academy.hwspringbootintro.exception.DataProcessingException;
 import mate.academy.hwspringbootintro.model.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -28,7 +29,8 @@ public class BookRepositoryImpl implements BookRepository {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't add book " + book, e);
+            throw new DataProcessingException("Can't add book " + book, e) {
+            };
         } finally {
             if (session != null) {
                 session.close();
@@ -39,12 +41,10 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public List<Book> findAll() {
         try (Session session = entityManager.unwrap(Session.class)) {
-            CriteriaQuery<Book> criteriaQuery = session.getCriteriaBuilder()
-                    .createQuery(Book.class);
-            criteriaQuery.from(Book.class);
-            return session.createQuery(criteriaQuery).getResultList();
+            Query<Book> query = session.createQuery("from Book", Book.class);
+            return query.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Can't get all books!!!", e);
+            throw new DataProcessingException("Can't get all books!!!", e);
         }
     }
 }
