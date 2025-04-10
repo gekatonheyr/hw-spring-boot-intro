@@ -2,7 +2,6 @@ package mate.academy.hwspringbootintro;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import mate.academy.hwspringbootintro.model.Book;
 import mate.academy.hwspringbootintro.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
