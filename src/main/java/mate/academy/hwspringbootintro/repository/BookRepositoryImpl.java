@@ -3,8 +3,8 @@ package mate.academy.hwspringbootintro.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 import mate.academy.hwspringbootintro.exception.DataProcessingException;
-import mate.academy.hwspringbootintro.exception.EntityNotFoundException;
 import mate.academy.hwspringbootintro.model.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -50,13 +50,13 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public Book getById(Long id) {
+    public Optional<Book> getById(Long id) {
         try (Session session = entityManager.unwrap(Session.class)) {
             Query<Book> query = session.createQuery("from Book where id = :id", Book.class)
                     .setParameter("id", id);
-            return query.getSingleResult();
+            return Optional.of(query.getSingleResult());
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't get book by given ID:" + id, e);
+            throw new DataProcessingException("Can't get book by given ID:" + id, e);
         }
     }
 }
