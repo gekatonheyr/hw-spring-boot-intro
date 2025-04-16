@@ -1,4 +1,4 @@
-package mate.academy.hwspringbootintro.repository;
+/*package mate.academy.hwspringbootintro.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -59,4 +59,4 @@ public class BookRepositoryImpl implements BookRepository {
             throw new DataProcessingException("Can't get book by given ID:" + id, e);
         }
     }
-}
+}*/
