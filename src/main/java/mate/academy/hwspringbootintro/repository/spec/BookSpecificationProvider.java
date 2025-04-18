@@ -11,7 +11,7 @@ public class BookSpecificationProvider implements SpecificationProvider<Book> {
     public Specification<Book> getSpecification(String paramName, String[] paramValues) {
         return ((root, query, criteriaBuilder) ->
                 root.get(paramName).in(Arrays.stream(paramValues).toArray()));
-        }
+    }
 
     @Override
     public String getKey() {

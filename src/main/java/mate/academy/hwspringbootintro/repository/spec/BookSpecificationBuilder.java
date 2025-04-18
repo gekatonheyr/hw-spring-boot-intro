@@ -17,7 +17,7 @@ public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
     @Override
     public Specification<Book> buildSpecification(Map<String, String> params) {
         Specification<Book> spec = Specification.where(null);
-        for(Map.Entry<String, String> entry : params.entrySet()) {
+        for (Map.Entry<String, String> entry : params.entrySet()) {
             SpecificationProvider<Book> bookSpecProv = specificationProviderManager
                     .getSpecificationProvider("book");
             String key = entry.getKey();
