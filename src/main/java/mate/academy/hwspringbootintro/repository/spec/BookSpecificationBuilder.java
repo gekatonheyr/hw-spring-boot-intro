@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
+    private final static String PARAMS_VALUES_DELIMITER = ",";
+
     private final SpecificationProviderManager<Book> specificationProviderManager;
 
     @Override
@@ -23,7 +25,7 @@ public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
             String key = entry.getKey();
             String value = entry.getValue();
             Specification<Book> bookSpec = bookSpecProv
-                            .getSpecification(key, value.split(","));
+                            .getSpecification(key, value.split(PARAMS_VALUES_DELIMITER));
             spec = spec.and(bookSpec);
         }
         return spec;
