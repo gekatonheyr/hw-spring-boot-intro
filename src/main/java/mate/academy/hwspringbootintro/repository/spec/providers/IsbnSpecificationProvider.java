@@ -17,6 +17,6 @@ public class IsbnSpecificationProvider implements SpecificationProvider<Book> {
     @Override
     public Specification<Book> getSpecification(String params) {
         return (root, query, criteriaBuilder) ->
-                root.get(ISBN_PROVIDER_KEY).in(criteriaBuilder.literal(params.trim()));
+                root.get(ISBN_PROVIDER_KEY).in(criteriaBuilder.literal(params));
     }
 }

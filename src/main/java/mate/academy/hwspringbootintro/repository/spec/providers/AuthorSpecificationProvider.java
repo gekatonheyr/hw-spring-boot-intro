@@ -18,6 +18,6 @@ public class AuthorSpecificationProvider implements SpecificationProvider<Book> 
     public Specification<Book> getSpecification(String params) {
 
         return (root, query, criteriaBuilder) ->
-            root.get(AUTHOR_PROVIDER_KEY).in(criteriaBuilder.literal(params.trim()));
+            root.get(AUTHOR_PROVIDER_KEY).in(criteriaBuilder.literal(params));
     }
 }

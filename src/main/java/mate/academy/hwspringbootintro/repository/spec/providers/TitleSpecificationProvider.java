@@ -17,6 +17,6 @@ public class TitleSpecificationProvider implements SpecificationProvider<Book> {
     @Override
     public Specification<Book> getSpecification(String params) {
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.like(root.get(TITLE_PROVIDER_KEY), "%" + params.trim() + "%");
+                criteriaBuilder.like(root.get(TITLE_PROVIDER_KEY), "%" + params + "%");
     }
 }
