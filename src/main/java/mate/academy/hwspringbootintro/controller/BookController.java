@@ -1,9 +1,9 @@
 package mate.academy.hwspringbootintro.controller;
 
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import mate.academy.hwspringbootintro.dto.BookDto;
+import mate.academy.hwspringbootintro.dto.BookSearchParameters;
 import mate.academy.hwspringbootintro.dto.CreateBookRequestDto;
 import mate.academy.hwspringbootintro.service.BookService;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +50,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public List<BookDto> search(@RequestParam Map<String, String> requestParams) {
+    public List<BookDto> search(BookSearchParameters requestParams) {
         return bookService.search(requestParams);
     }
 }

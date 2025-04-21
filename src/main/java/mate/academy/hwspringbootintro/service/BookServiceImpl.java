@@ -1,9 +1,9 @@
 package mate.academy.hwspringbootintro.service;
 
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import mate.academy.hwspringbootintro.dto.BookDto;
+import mate.academy.hwspringbootintro.dto.BookSearchParameters;
 import mate.academy.hwspringbootintro.dto.CreateBookRequestDto;
 import mate.academy.hwspringbootintro.exception.EntityNotFoundException;
 import mate.academy.hwspringbootintro.mapper.BookMapper;
@@ -52,7 +52,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> search(Map<String, String> params) {
+    public List<BookDto> search(BookSearchParameters params) {
         return bookRepository.findAll(bookSpecificationBuilder.buildSpecification(params)).stream()
                 .map(bookMapper::toDto)
                 .toList();
