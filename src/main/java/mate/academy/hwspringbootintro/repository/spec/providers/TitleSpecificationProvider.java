@@ -10,7 +10,9 @@ public class TitleSpecificationProvider implements SpecificationProvider<Book> {
     private static final String TITLE_PROVIDER_KEY = "title";
 
     @Override
-    public String getKey() { return TITLE_PROVIDER_KEY; }
+    public String getKey() {
+        return TITLE_PROVIDER_KEY;
+    }
 
     @Override
     public Specification<Book> getSpecification(String params) {
