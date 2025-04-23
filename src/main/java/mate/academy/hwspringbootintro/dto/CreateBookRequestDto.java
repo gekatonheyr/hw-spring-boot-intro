@@ -1,10 +1,9 @@
 package mate.academy.hwspringbootintro.dto;
 
-import java.math.BigDecimal;
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
