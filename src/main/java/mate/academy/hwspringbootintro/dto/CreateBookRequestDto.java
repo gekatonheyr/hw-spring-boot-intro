@@ -1,7 +1,8 @@
 package mate.academy.hwspringbootintro.dto;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -14,14 +15,14 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class CreateBookRequestDto {
-    @NotNull
+    @NotBlank
     private String title;
-    @NotNull
+    @NotBlank
     private String author;
-    @NotNull
+    @NotBlank
     private String isbn;
     @NotNull
-    @Min(0)
+    @Positive
     private BigDecimal price;
     @Size(min = 0, max = 255)
     private String description;
