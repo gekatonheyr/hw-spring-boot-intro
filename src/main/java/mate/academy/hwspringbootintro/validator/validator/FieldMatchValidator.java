@@ -2,9 +2,9 @@ package mate.academy.hwspringbootintro.validator.validator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import java.lang.reflect.Field;
-import mate.academy.hwspringbootintro.exception.RegistrationException;
+import java.util.Objects;
 import mate.academy.hwspringbootintro.validator.annotation.FieldMatch;
+import org.springframework.beans.BeanWrapperImpl;
 
 public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
     private String firstFieldName;
@@ -20,25 +20,7 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext constraintValidatorContext) {
-        Class<?> clazz = obj.getClass();
-        Field firstField;
-        Field secondField;
-        Object firstFieldValue;
-        Object secondFieldValue;
-        try {
-            firstField = clazz.getDeclaredField(firstFieldName);
-            firstField.setAccessible(true);
-            firstFieldValue = firstField.get(obj);
-            secondField = clazz.getDeclaredField(secondFieldName);
-            secondField.setAccessible(true);
-            secondFieldValue = secondField.get(obj);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        if (!((firstFieldValue != null && secondFieldValue != null)
-                && (firstFieldValue.equals(secondFieldValue)))) {
-            throw new RegistrationException(message);
-        }
-        return true;
+        return Objects.equals(new BeanWrapperImpl(obj).getPropertyValue(firstFieldName),
+                            new BeanWrapperImpl(obj).getPropertyValue(secondFieldName));
     }
 }

@@ -1,6 +1,6 @@
 package mate.academy.hwspringbootintro.dto.auth;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,17 +11,17 @@ import mate.academy.hwspringbootintro.validator.annotation.FieldMatch;
 @FieldMatch(first = "password", second = "repeatPassword", message = "Given passwords has to "
         + "match each other. Please check the input")
 public class RegisterUserRequestDto {
-    @NotNull
+    @NotBlank
     private String email;
-    @NotNull
+    @NotBlank
     @Size(min = 5, max = 20)
     private String password;
-    @NotNull
+    @NotBlank
     @Size(min = 5, max = 20)
     private String repeatPassword;
-    @NotNull
+    @NotBlank
     private String firstName;
-    @NotNull
+    @NotBlank
     private String lastName;
     private String shippingAddress;
 }

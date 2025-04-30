@@ -1,6 +1,5 @@
 package mate.academy.hwspringbootintro.service;
 
-import jakarta.persistence.Tuple;
 import lombok.RequiredArgsConstructor;
 import mate.academy.hwspringbootintro.dto.auth.RegisterUserRequestDto;
 import mate.academy.hwspringbootintro.dto.auth.UserResponseDto;
@@ -18,8 +17,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto register(RegisterUserRequestDto registerUserRequestDto)
             throws RegistrationException {
-        Tuple foundByEmail = userRepository.findByEmail(registerUserRequestDto.getEmail());
-        if (foundByEmail != null) {
+        if (userRepository.existsByEmail(registerUserRequestDto.getEmail())) {
             throw new RegistrationException("Email is already in use. Please try another one.");
         }
         return userMapper.toDto(userRepository.save(userMapper.toEntity(registerUserRequestDto)));
