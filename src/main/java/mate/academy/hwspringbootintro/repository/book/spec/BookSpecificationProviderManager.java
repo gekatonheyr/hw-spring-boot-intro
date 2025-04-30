@@ -1,10 +1,10 @@
-package mate.academy.hwspringbootintro.repository.spec;
+package mate.academy.hwspringbootintro.repository.book.spec;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.hwspringbootintro.model.Book;
-import mate.academy.hwspringbootintro.repository.SpecificationProvider;
-import mate.academy.hwspringbootintro.repository.SpecificationProviderManager;
+import mate.academy.hwspringbootintro.repository.book.SpecificationProvider;
+import mate.academy.hwspringbootintro.repository.book.SpecificationProviderManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

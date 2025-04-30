@@ -1,4 +1,4 @@
-package mate.academy.hwspringbootintro.dto;
+package mate.academy.hwspringbootintro.dto.book;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

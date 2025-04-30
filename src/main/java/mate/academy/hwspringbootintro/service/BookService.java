@@ -1,8 +1,8 @@
 package mate.academy.hwspringbootintro.service;
 
-import mate.academy.hwspringbootintro.dto.BookDto;
-import mate.academy.hwspringbootintro.dto.BookSearchParameters;
-import mate.academy.hwspringbootintro.dto.CreateBookRequestDto;
+import mate.academy.hwspringbootintro.dto.book.BookDto;
+import mate.academy.hwspringbootintro.dto.book.BookSearchParameters;
+import mate.academy.hwspringbootintro.dto.book.CreateBookRequestDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

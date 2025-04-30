@@ -1,4 +1,4 @@
-package mate.academy.hwspringbootintro.dto;
+package mate.academy.hwspringbootintro.dto.book;
 
 public record BookSearchParameters(String title,
                                    String author,

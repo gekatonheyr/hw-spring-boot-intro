@@ -1,4 +1,4 @@
-package mate.academy.hwspringbootintro.repository;
+package mate.academy.hwspringbootintro.repository.book;
 
 import org.springframework.data.jpa.domain.Specification;
 

@@ -1,10 +1,10 @@
-package mate.academy.hwspringbootintro.repository.spec;
+package mate.academy.hwspringbootintro.repository.book.spec;
 
 import lombok.RequiredArgsConstructor;
-import mate.academy.hwspringbootintro.dto.BookSearchParameters;
+import mate.academy.hwspringbootintro.dto.book.BookSearchParameters;
 import mate.academy.hwspringbootintro.model.Book;
-import mate.academy.hwspringbootintro.repository.SpecificationBuilder;
-import mate.academy.hwspringbootintro.repository.SpecificationProviderManager;
+import mate.academy.hwspringbootintro.repository.book.SpecificationBuilder;
+import mate.academy.hwspringbootintro.repository.book.SpecificationProviderManager;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
