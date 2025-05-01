@@ -1,4 +1,4 @@
-package mate.academy.hwspringbootintro.repository;
+package mate.academy.hwspringbootintro.repository.book;
 
 import mate.academy.hwspringbootintro.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;

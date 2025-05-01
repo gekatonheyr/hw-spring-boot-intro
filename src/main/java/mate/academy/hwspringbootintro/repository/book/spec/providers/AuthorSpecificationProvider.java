@@ -1,7 +1,7 @@
-package mate.academy.hwspringbootintro.repository.spec.providers;
+package mate.academy.hwspringbootintro.repository.book.spec.providers;
 
 import mate.academy.hwspringbootintro.model.Book;
-import mate.academy.hwspringbootintro.repository.SpecificationProvider;
+import mate.academy.hwspringbootintro.repository.book.SpecificationProvider;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
