@@ -7,9 +7,12 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.hwspringbootintro.dto.auth.RegisterUserRequestDto;
 import mate.academy.hwspringbootintro.dto.auth.UserResponseDto;
 import mate.academy.hwspringbootintro.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Authentication part of API", description = "This part is responsible for users"
@@ -19,15 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Operation(summary = "User registration endpoint", description = "This endpoint accepts "
             + "registration data of user and includes corresponding information to database. "
             + "Unauthorized users will not bee allowed to purchase products or see most "
             + "significant events.")
     @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto register(
             @RequestBody @Valid RegisterUserRequestDto registerUserRequestDto
     ) {
+        registerUserRequestDto.setPassword(
+                passwordEncoder.encode(registerUserRequestDto.getPassword()));
         return userService.register(registerUserRequestDto);
     }
 }

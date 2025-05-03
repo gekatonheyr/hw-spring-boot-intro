@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-roles-records-to-table
+      author: geks
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: 'ADMIN'
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: 'USER'
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: 'MANAGER'
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: 'GUEST'
