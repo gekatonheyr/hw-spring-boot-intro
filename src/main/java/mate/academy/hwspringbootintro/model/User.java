@@ -2,18 +2,20 @@ package mate.academy.hwspringbootintro.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +25,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @ToString
 @Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +34,17 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
-    @Size(min = 5, max = 80)
     private String password;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
     private String lastName;
     private String shippingAddress;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
+    @Fetch(FetchMode.JOIN)
     private Set<Role> roles;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean isDeleted;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -57,7 +63,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return !isDeleted;
     }
 
     @Override
