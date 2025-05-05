@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.hwspringbootintro.dto.auth.RegisterUserRequestDto;
 import mate.academy.hwspringbootintro.dto.auth.UserResponseDto;
 import mate.academy.hwspringbootintro.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Authentication part of API", description = "This part is responsible for users"
@@ -25,6 +27,7 @@ public class AuthController {
             + "Unauthorized users will not bee allowed to purchase products or see most "
             + "significant events.")
     @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto register(
             @RequestBody @Valid RegisterUserRequestDto registerUserRequestDto
     ) {

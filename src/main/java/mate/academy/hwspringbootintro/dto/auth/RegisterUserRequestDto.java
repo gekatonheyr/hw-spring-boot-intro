@@ -14,10 +14,10 @@ public class RegisterUserRequestDto {
     @NotBlank
     private String email;
     @NotBlank
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 80)
     private String password;
     @NotBlank
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 80)
     private String repeatPassword;
     @NotBlank
     private String firstName;

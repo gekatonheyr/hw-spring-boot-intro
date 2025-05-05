@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-users-to-table
+      author: geks
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: 'admin@example.com'
+              - column:
+                  name: password
+                  value: '$2a$10$t/ot32GHDeF8WbJRQFKZxu/xItcSzOYmm2fe5428xIiOT2OAU9Bqe'
+              - column:
+                  name: first_name
+                  value: 'Somename'
+              - column:
+                  name: last_name
+                  value: 'Somelast'
+              - column:
+                  name: shipping_address
+                  value: 'some address to ship order'
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: 'user@example.com'
+              - column:
+                  name: password
+                  value: '$2a$10$FYHk13OgfzIE9rkitnwQqeu7TApPmKm3b6ugA1oVCmJuHdLiWnI82'
+              - column:
+                  name: first_name
+                  value: 'Username'
+              - column:
+                  name: last_name
+                  value: 'Userlast'
+              - column:
+                  name: shipping_address
+                  value: 'some address to ship order'
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: 'adminuser@example.com'
+              - column:
+                  name: password
+                  value: '$2a$10$R/3yI03556BWX5GlDp4L5eve/PXsQK8Mbaeix3/GC1vwe4QNVOXte'
+              - column:
+                  name: first_name
+                  value: 'Adminuser'
+              - column:
+                  name: last_name
+                  value: 'Adminuser'
+              - column:
+                  name: shipping_address
+                  value: 'some address to ship order'

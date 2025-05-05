@@ -11,6 +11,7 @@ import mate.academy.hwspringbootintro.service.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class BookController {
             + "books data. Endpoint supports pagination and sorting by using GET method path"
             + "parameters 'page', 'size' and 'sort")
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Page<BookDto> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
@@ -40,6 +42,7 @@ public class BookController {
     @Operation(summary = "Get book by id", description = "This endpoint gives all the data about"
             + " the book with given id.")
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public BookDto getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
@@ -48,6 +51,7 @@ public class BookController {
             + "book record by using JSON body to carry the data about the book object. See the "
             + "example to give right format of the request.")
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public BookDto createBook(@RequestBody @Valid CreateBookRequestDto bookDto) {
         return bookService.save(bookDto);
     }
@@ -57,6 +61,7 @@ public class BookController {
             + "putting the needed data to the JSON body f the request. See example to put the "
             + "right data to the request to avoid of errors.")
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public BookDto updateBook(@PathVariable Long id,
                               @RequestBody @Valid CreateBookRequestDto bookDto) {
         return bookService.updateBook(id, bookDto);
@@ -68,6 +73,7 @@ public class BookController {
             + "NO_CONTENT status will be sent.")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
     }
@@ -77,6 +83,7 @@ public class BookController {
             + "parameters as 'author', 'title' and/or 'isbn'. By the way 'title' parameter could"
             + "be given partially, other params need to strictly match the data in the DB.")
     @GetMapping("/search")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Page<BookDto> search(BookSearchParameters requestParams, Pageable pageable) {
         return bookService.search(requestParams, pageable);
     }
