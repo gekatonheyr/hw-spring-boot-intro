@@ -42,8 +42,8 @@ public class AuthController {
             + "authenticate user by email and password given during registration. Use JSON to "
             + "send data.")
     @PostMapping("/login")
-    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto userLoginRequestDto)
-    {
+    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto
+                                                  userLoginRequestDto) {
         return authService.authenticate(userLoginRequestDto);
     }
 }
