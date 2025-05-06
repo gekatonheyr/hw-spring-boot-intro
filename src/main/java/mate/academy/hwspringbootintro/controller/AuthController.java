@@ -38,8 +38,12 @@ public class AuthController {
         return userService.register(registerUserRequestDto);
     }
 
+    @Operation(summary = "Endpoint for user login", description = "Use this endpoint to "
+            + "authenticate user by email and password given during registration. Use JSON to "
+            + "send data.")
     @PostMapping("/login")
-    public UserLoginResponseDto login(@RequestBody UserLoginRequestDto userLoginRequestDto) {
+    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto userLoginRequestDto)
+    {
         return authService.authenticate(userLoginRequestDto);
     }
 }
