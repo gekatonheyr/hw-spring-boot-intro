@@ -1,7 +1,9 @@
 package mate.academy.hwspringbootintro.service;
 
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.hwspringbootintro.dto.book.BookDto;
+import mate.academy.hwspringbootintro.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.hwspringbootintro.dto.book.BookSearchParameters;
 import mate.academy.hwspringbootintro.dto.book.CreateBookRequestDto;
 import mate.academy.hwspringbootintro.exception.EntityNotFoundException;
@@ -9,6 +11,7 @@ import mate.academy.hwspringbootintro.mapper.BookMapper;
 import mate.academy.hwspringbootintro.model.Book;
 import mate.academy.hwspringbootintro.repository.book.BookRepository;
 import mate.academy.hwspringbootintro.repository.book.spec.BookSpecificationBuilder;
+import mate.academy.hwspringbootintro.repository.category.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookSpecificationBuilder bookSpecificationBuilder;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public BookDto save(CreateBookRequestDto requestBook) {
@@ -54,5 +58,14 @@ public class BookServiceImpl implements BookService {
     public Page<BookDto> search(BookSearchParameters params, Pageable pageable) {
         return bookRepository.findAll(bookSpecificationBuilder.buildSpecification(params),
                         pageable).map(bookMapper::toDto);
+    }
+
+    @Override
+    public Page<BookDtoWithoutCategoryIds> findAllByCategoryId(Long id, Pageable pageable) {
+        return bookRepository.findAllByCategories(Set.of(categoryRepository
+                        .findById(id).orElseThrow(
+                                () -> new EntityNotFoundException("Can't find category by id: "
+                                        + id))),
+                pageable).map(bookMapper::toDtoWithoutCategories);
     }
 }
