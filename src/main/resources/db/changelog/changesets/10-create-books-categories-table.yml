@@ -18,8 +18,12 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_book_category
+                    references: books(id)
               - column:
                   name: category_id
                   type: bigint
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_category-book
+                    references: categories(id)

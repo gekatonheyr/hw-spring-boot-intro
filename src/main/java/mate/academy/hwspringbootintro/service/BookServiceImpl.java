@@ -9,6 +9,7 @@ import mate.academy.hwspringbootintro.dto.book.CreateBookRequestDto;
 import mate.academy.hwspringbootintro.exception.EntityNotFoundException;
 import mate.academy.hwspringbootintro.mapper.BookMapper;
 import mate.academy.hwspringbootintro.model.Book;
+import mate.academy.hwspringbootintro.model.Category;
 import mate.academy.hwspringbootintro.repository.book.BookRepository;
 import mate.academy.hwspringbootintro.repository.book.spec.BookSpecificationBuilder;
 import mate.academy.hwspringbootintro.repository.category.CategoryRepository;
@@ -22,7 +23,6 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookSpecificationBuilder bookSpecificationBuilder;
-    private final CategoryRepository categoryRepository;
 
     @Override
     public BookDto save(CreateBookRequestDto requestBook) {
@@ -62,10 +62,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Page<BookDtoWithoutCategoryIds> findAllByCategoryId(Long id, Pageable pageable) {
-        return bookRepository.findAllByCategories(Set.of(categoryRepository
-                        .findById(id).orElseThrow(
-                                () -> new EntityNotFoundException("Can't find category by id: "
-                                        + id))),
-                pageable).map(bookMapper::toDtoWithoutCategories);
+        return bookRepository.findAllByCategories(Set.of(new Category(id)), pageable)
+                .map(bookMapper::toDtoWithoutCategories);
     }
 }

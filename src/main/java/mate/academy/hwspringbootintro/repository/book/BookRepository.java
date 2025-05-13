@@ -12,4 +12,5 @@ public interface BookRepository
         extends JpaRepository<Book, Long>, JpaSpecificationExecutor<Book> {
 
     Page<Book> findAllByCategories(Set<Category> categories, Pageable pageable);
+
 }

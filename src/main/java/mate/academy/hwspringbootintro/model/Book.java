@@ -16,8 +16,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -45,7 +43,6 @@ public class Book {
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
     @ManyToMany
-    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "books_categories", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     @ToString.Exclude
