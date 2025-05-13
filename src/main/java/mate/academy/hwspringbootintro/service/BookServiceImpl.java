@@ -12,7 +12,6 @@ import mate.academy.hwspringbootintro.model.Book;
 import mate.academy.hwspringbootintro.model.Category;
 import mate.academy.hwspringbootintro.repository.book.BookRepository;
 import mate.academy.hwspringbootintro.repository.book.spec.BookSpecificationBuilder;
-import mate.academy.hwspringbootintro.repository.category.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
