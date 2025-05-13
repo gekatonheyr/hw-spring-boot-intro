@@ -15,3 +15,7 @@ databaseChangeLog:
       file: db/changelog/changesets/07-add-users-roles-records.yml
   - include:
       file: db/changelog/changesets/08-add-is_deleted_column-to-users-table.yml
+  - include:
+      file: db/changelog/changesets/09-create-categories-table.yml
+  - include:
+      file: db/changelog/changesets/10-create-books-categories-table.yml
