@@ -1,6 +1,7 @@
 package mate.academy.hwspringbootintro.dto.book;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -31,5 +32,6 @@ public class CreateBookRequestDto {
     @NotBlank
     @Size(max = 255)
     private String coverImage;
+    @NotEmpty
     private List<Long> categoryIds;
 }

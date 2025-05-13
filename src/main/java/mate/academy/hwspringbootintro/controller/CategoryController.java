@@ -44,7 +44,7 @@ public class CategoryController {
             + "give all the category data with specific ID.")
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public CategoryDto getCategoryById(@PathVariable("id") Long id) {
+    public CategoryDto getCategoryById(@PathVariable Long id) {
         return categoryService.getCategoryById(id);
     }
 
@@ -59,7 +59,7 @@ public class CategoryController {
 
     @Operation(summary = "Create new category.", description = "Use his endpoint to create new "
             + "category.")
-    @PostMapping("")
+    @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto requestDto) {
         return categoryService.save(requestDto);

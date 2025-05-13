@@ -12,8 +12,6 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.commons.lang3.builder.EqualsExclude;
-import org.apache.commons.lang3.builder.HashCodeExclude;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.SQLDelete;
@@ -45,8 +43,6 @@ public class User implements UserDetails {
     @OneToMany
     @Fetch(FetchMode.JOIN)
     @ToString.Exclude
-    @HashCodeExclude
-    @EqualsExclude
     private Set<Role> roles;
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
