@@ -4,10 +4,9 @@ import mate.academy.hwspringbootintro.dto.shoppingcart.CartItemRequestDto;
 import mate.academy.hwspringbootintro.dto.shoppingcart.CartItemResponseDto;
 import mate.academy.hwspringbootintro.dto.shoppingcart.CartItemUpdateRequestDto;
 import mate.academy.hwspringbootintro.dto.shoppingcart.ShoppingCartDto;
-import org.springframework.data.domain.Pageable;
 
 public interface ShoppingCartService {
-    ShoppingCartDto getAllCartItems(Pageable pageable);
+    ShoppingCartDto getAllCartItems();
 
     CartItemResponseDto addItemsToShoppingCart(CartItemRequestDto cartItemRequestDto);
 

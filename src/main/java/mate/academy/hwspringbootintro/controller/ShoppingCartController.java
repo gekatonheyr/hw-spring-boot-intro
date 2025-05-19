@@ -9,7 +9,6 @@ import mate.academy.hwspringbootintro.dto.shoppingcart.CartItemResponseDto;
 import mate.academy.hwspringbootintro.dto.shoppingcart.CartItemUpdateRequestDto;
 import mate.academy.hwspringbootintro.dto.shoppingcart.ShoppingCartDto;
 import mate.academy.hwspringbootintro.service.ShoppingCartService;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,8 +34,8 @@ public class ShoppingCartController {
     @Operation(summary = "Get all items of shopping cart", description = "Use this endpoint to "
             + "get all items in specified user shopping cart.")
     @GetMapping
-    public ShoppingCartDto getShoppingCart(Pageable pageable) {
-        return shoppingCartService.getAllCartItems(pageable);
+    public ShoppingCartDto getShoppingCart() {
+        return shoppingCartService.getAllCartItems();
     }
 
     @Operation(summary = "Put iven items to shopping cart", description = "User should use this "
@@ -51,7 +50,7 @@ public class ShoppingCartController {
             + "help you to change items quantity in the cart by using PUT request.")
     @PutMapping("/items/{cartItemId}")
     public CartItemResponseDto updateItemQuantity(@PathVariable Long cartItemId,
-                                       @RequestBody CartItemUpdateRequestDto cartItem) {
+                                       @RequestBody @Valid CartItemUpdateRequestDto cartItem) {
         return shoppingCartService.updateItemQuantity(cartItemId, cartItem);
     }
 

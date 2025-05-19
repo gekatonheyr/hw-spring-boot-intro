@@ -11,6 +11,7 @@ import mate.academy.hwspringbootintro.repository.auth.UserRepository;
 import mate.academy.hwspringbootintro.repository.shoppingcart.ShoppingCartRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private final ShoppingCartRepository shoppingCartRepository;
 
     @Override
+    @Transactional
     public UserResponseDto register(RegisterUserRequestDto registerUserRequestDto)
             throws RegistrationException {
         registerUserRequestDto.setPassword(

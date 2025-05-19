@@ -15,7 +15,6 @@ import mate.academy.hwspringbootintro.model.User;
 import mate.academy.hwspringbootintro.repository.book.BookRepository;
 import mate.academy.hwspringbootintro.repository.shoppingcart.CartItemRepository;
 import mate.academy.hwspringbootintro.repository.shoppingcart.ShoppingCartRepository;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final BookRepository bookRepository;
 
     @Override
-    public ShoppingCartDto getAllCartItems(Pageable pageable) {
+    public ShoppingCartDto getAllCartItems() {
         ShoppingCart shoppingCart = cartRepository
                 .findShoppingCartByUserId(getCurrentUser()
                         .getId())
