@@ -27,19 +27,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCartDto getAllCartItems(Long currentUserId) {
-        ShoppingCart shoppingCart = cartRepository
-                .findShoppingCartByUserId(currentUserId)
-                        .orElseThrow(()
-                                -> new EntityNotFoundException("Shopping cart not found for user "
-                                + "with ID: " + currentUserId));
-        return shoppingCartMapper.toShoppingCartDto(shoppingCart);
+        return shoppingCartMapper.toShoppingCartDto(retrieveShoppingCartByUserId(currentUserId));
     }
 
     @Override
     public void deleteItemsFromShoppingCart(Long cartItemId, Long currentUserId) {
-        ShoppingCart shoppingCart = cartRepository.findShoppingCartByUserId(currentUserId)
-                .orElseThrow(() -> new EntityNotFoundException("Shopping cart not found for user "
-                        + currentUserId));
+        ShoppingCart shoppingCart = retrieveShoppingCartByUserId(currentUserId);
         shoppingCart.getCartItems().removeIf(cartItem -> cartItem.getId().equals(cartItemId));
         cartRepository.save(shoppingCart);
     }
@@ -48,9 +41,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public ShoppingCartDto updateItemQuantity(Long cartItemId,
                                               CartItemUpdateRequestDto updatedCartItem,
                                               Long currentUserId) {
-        ShoppingCart shoppingCart = cartRepository.findShoppingCartByUserId(currentUserId)
-                .orElseThrow(() -> new EntityNotFoundException("Shopping cart not found for user "
-                        + currentUserId));
+        ShoppingCart shoppingCart = retrieveShoppingCartByUserId(currentUserId);
         shoppingCart.getCartItems().stream()
                 .filter(item -> item.getId().equals(cartItemId))
                 .findFirst()
@@ -62,11 +53,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCartDto addItemsToShoppingCart(CartItemRequestDto cartItemRequestDto,
                                                   Long currentUserId) {
-        ShoppingCart shoppingCart = cartRepository
-                .findShoppingCartByUserId(currentUserId)
-                        .orElseThrow(()
-                                -> new EntityNotFoundException("Shopping cart not found for user "
-                        + "with ID: " + currentUserId));
+        ShoppingCart shoppingCart = retrieveShoppingCartByUserId(currentUserId);
         Set<CartItem> presentCartItems = shoppingCart.getCartItems();
         Optional<CartItem> foundBook = presentCartItems.stream()
                 .filter(item -> item.getBook().getId().equals(cartItemRequestDto.bookId()))
@@ -94,5 +81,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUser(user);
         cartRepository.save(shoppingCart);
+    }
+
+    private ShoppingCart retrieveShoppingCartByUserId(Long currentUserId) {
+        return cartRepository
+                .findShoppingCartByUserId(currentUserId)
+                .orElseThrow(()
+                        -> new EntityNotFoundException("Shopping cart not found for user "
+                        + "with ID: " + currentUserId));
     }
 }
