@@ -8,8 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,11 +29,5 @@ public class CartItem {
     private Book book;
     private int quantity;
 
-    public CartItem(@NotNull ShoppingCart shoppingCart,
-                    @NotNull Book book,
-                    @NotNull @Positive int quantity) {
-        this.shoppingCart = shoppingCart;
-        this.book = book;
-        this.quantity = quantity;
-    }
+
 }
