@@ -7,7 +7,6 @@ import mate.academy.hwspringbootintro.dto.auth.UserResponseDto;
 import mate.academy.hwspringbootintro.exception.RegistrationException;
 import mate.academy.hwspringbootintro.mapper.UserMapper;
 import mate.academy.hwspringbootintro.model.Role;
-import mate.academy.hwspringbootintro.model.ShoppingCart;
 import mate.academy.hwspringbootintro.model.User;
 import mate.academy.hwspringbootintro.repository.auth.RoleRepository;
 import mate.academy.hwspringbootintro.repository.auth.UserRepository;
@@ -33,11 +32,11 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toEntity(registerUserRequestDto);
         user.setPassword(passwordEncoder.encode(registerUserRequestDto.getPassword()));
-        user.setRoles(Set.of(roleRepository.findRoleByName(Role.RoleName.USER).get()));
-        User newUser = userRepository.save(user);
-        ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setUser(user);
-        shoppingCartService.createShoppingCart(newUser);
-        return userMapper.toDto(newUser);
+        user.setRoles(Set.of(roleRepository.findRoleByName(Role.RoleName.USER).orElseThrow(()
+                        -> new RegistrationException("There is no such role: "
+                + Role.RoleName.USER))));
+        userRepository.save(user);
+        shoppingCartService.createShoppingCart(user);
+        return userMapper.toDto(user);
     }
 }

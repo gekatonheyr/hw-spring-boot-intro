@@ -66,7 +66,5 @@ public class ShoppingCartController {
     private Long getCurrentUserId() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user.getId();
-
     }
-
 }
