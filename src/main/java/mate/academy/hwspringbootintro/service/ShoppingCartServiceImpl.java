@@ -83,7 +83,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         cartRepository.save(shoppingCart);
     }
 
-    private ShoppingCart retrieveShoppingCartByUserId(Long currentUserId) {
+    @Override
+    public ShoppingCart retrieveShoppingCartByUserId(Long currentUserId) {
         return cartRepository
                 .findShoppingCartByUserId(currentUserId)
                 .orElseThrow(()
