@@ -3,6 +3,7 @@ package mate.academy.hwspringbootintro.service;
 import mate.academy.hwspringbootintro.dto.shoppingcart.CartItemRequestDto;
 import mate.academy.hwspringbootintro.dto.shoppingcart.CartItemUpdateRequestDto;
 import mate.academy.hwspringbootintro.dto.shoppingcart.ShoppingCartDto;
+import mate.academy.hwspringbootintro.model.ShoppingCart;
 import mate.academy.hwspringbootintro.model.User;
 
 public interface ShoppingCartService {
@@ -18,4 +19,6 @@ public interface ShoppingCartService {
     void deleteItemsFromShoppingCart(Long cartItemId, Long currentUserId);
 
     void createShoppingCart(User user);
+
+    ShoppingCart retrieveShoppingCartByUserId(Long currentUserId);
 }

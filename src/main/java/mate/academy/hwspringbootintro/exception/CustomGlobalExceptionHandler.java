@@ -49,6 +49,14 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(value = { DataProcessingException.class })
+    public ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
     private String getErrorMessage(ObjectError error) {
         if (error instanceof FieldError) {
             String fieldName = ((FieldError) error).getField();
