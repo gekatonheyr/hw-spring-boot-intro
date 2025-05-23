@@ -6,8 +6,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import mate.academy.hwspringbootintro.config.MapperConfig;
 import mate.academy.hwspringbootintro.dto.order.CreateOrderRequestDto;
-import mate.academy.hwspringbootintro.dto.order.CreateOrderResponseDto;
-import mate.academy.hwspringbootintro.dto.order.OrderSetStatusRequestDto;
+import mate.academy.hwspringbootintro.dto.order.OrderResponseDto;
+import mate.academy.hwspringbootintro.dto.order.UpdateOrderRequestDto;
 import mate.academy.hwspringbootintro.model.Order;
 import mate.academy.hwspringbootintro.model.OrderItem;
 import mate.academy.hwspringbootintro.model.ShoppingCart;
@@ -24,7 +24,7 @@ public interface OrderMapper {
             source = "user.id")
     @Mapping(target = "orderItems",
             source = "orderItems")
-    CreateOrderResponseDto toDto(Order order);
+    OrderResponseDto toDto(Order order);
 
     @Mapping(target = "id",
             ignore = true)
@@ -53,5 +53,5 @@ public interface OrderMapper {
     }
 
     void updateEntity(@MappingTarget Order order,
-                      OrderSetStatusRequestDto orderSetStatusRequestDto);
+                      UpdateOrderRequestDto updateOrderRequestDto);
 }

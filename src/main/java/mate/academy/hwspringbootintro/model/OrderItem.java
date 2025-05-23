@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import java.math.BigDecimal;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -24,7 +23,6 @@ import org.hibernate.annotations.SQLRestriction;
 @Setter
 @SQLDelete(sql = "UPDATE order_items SET is_deleted = true WHERE id = ?")
 @SQLRestriction("is_deleted = false")
-@NoArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +35,7 @@ public class OrderItem {
     private Book book;
     @Min(1)
     private int quantity;
-    @Min(0)
+    @Column(nullable = false)
     private BigDecimal price;
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean isDeleted;

@@ -2,21 +2,20 @@ package mate.academy.hwspringbootintro.service;
 
 import java.util.List;
 import mate.academy.hwspringbootintro.dto.order.CreateOrderRequestDto;
-import mate.academy.hwspringbootintro.dto.order.CreateOrderResponseDto;
 import mate.academy.hwspringbootintro.dto.order.OrderItemsResponseDto;
-import mate.academy.hwspringbootintro.dto.order.OrderSetStatusRequestDto;
-import mate.academy.hwspringbootintro.model.User;
+import mate.academy.hwspringbootintro.dto.order.OrderResponseDto;
+import mate.academy.hwspringbootintro.dto.order.UpdateOrderRequestDto;
 
 public interface OrderService {
-    List<CreateOrderResponseDto> getOrdersHistory(User user);
+    List<OrderResponseDto> getOrdersHistory(Long userId);
 
-    CreateOrderResponseDto createNewOrder(User user,
-                                          CreateOrderRequestDto createOrderRequestDto);
+    OrderResponseDto createNewOrder(Long userId,
+                                    CreateOrderRequestDto createOrderRequestDto);
 
-    CreateOrderResponseDto setNewOrderStatus(Long id,
-                                              OrderSetStatusRequestDto orderSetStatusRequestDto);
+    OrderResponseDto setNewOrderStatus(Long id,
+                                       UpdateOrderRequestDto updateOrderRequestDto);
 
-    List<OrderItemsResponseDto> getOrderItems(User user, Long orderId);
+    List<OrderItemsResponseDto> getOrderItems(Long userId, Long orderId);
 
-    OrderItemsResponseDto getSpecifiedOrderItem(User user, Long orderId, Long itemId);
+    OrderItemsResponseDto getSpecifiedOrderItem(Long userId, Long orderId, Long itemId);
 }
