@@ -49,7 +49,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(value = { DataProcessingException.class })
+    @ExceptionHandler(value = { OrderProcessingException.class })
     public ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
