@@ -67,14 +67,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderItemsResponseDto> getOrderItems(Long userId, Long orderId) {
         return orderItemRepository.findAllByOrderIdAndOrder_UserId(orderId, userId)
-                .orElseThrow(() -> new OrderProcessingException("Can't find items for order: "
+                .orElseThrow(() -> new EntityNotFoundException("Can't find items for order: "
                 + orderId + " for user: " + userId)).stream().map(orderItemMapper::toDto).toList();
     }
 
     @Override
     public OrderItemsResponseDto getSpecifiedOrderItem(Long userId, Long orderId, Long itemId) {
         return orderItemMapper.toDto(orderItemRepository.findByIdAndOrderIdAndOrder_UserId(itemId,
-                        orderId, userId).orElseThrow(() -> new OrderProcessingException("Can't "
+                        orderId, userId).orElseThrow(() -> new EntityNotFoundException("Can't "
                 + "find item with such parameters - user ID: " + userId
                 + " order ID: " + orderId
                 + " item ID: " + itemId)));
